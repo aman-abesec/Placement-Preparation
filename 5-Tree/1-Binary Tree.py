@@ -386,7 +386,7 @@ def inorderIter(root):
         curr=stack.pop()
         print(curr.val,end=" ")
         curr=curr.right
-        
+
 #===========================================
 #Preorder Iterative Traversal
 #============================================
@@ -402,7 +402,43 @@ def preorIter(root):
             curr=curr.left
         curr=stack.pop()
         curr=curr.right
+
+#================================================
+#Post Oreder Traversal Using two stack
+#=================================================
+def postorderIter1(root):
+    if root==None:return result
+    s1=[]
+    s2=[]
+    s1.append(root)
+    while s1!=[]:
+        k=s1.pop()
+        s2.append(k)
+        if k.left!=None:s1.append(k.left)
+        if k.right!=None:s1.append(k.right)
+    while s2!=[]:
+        print(s2.pop().val,end=" ")
         
+#================================================
+#Post Oreder Traversal Using one stack
+#=================================================
+def postorderIter2(root):
+    curr=root
+    prev=None
+    stack=[]
+    while curr!=None or stack!=[]:
+        if curr!=None:
+            stack.append(curr)
+            curr=curr.left
+        else:
+            curr=stack[-1]
+            if curr!=None or curr->right!=prev:
+                print(curr.val,end=" ")
+                prev=curr
+                curr=None
+            else:
+                curr=curr.right
+                
 parent=Tree(50)
 parent.left=Tree(40)
 parent.right=Tree(30)
