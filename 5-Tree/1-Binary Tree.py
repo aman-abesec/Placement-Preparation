@@ -370,6 +370,22 @@ def lca2(head,n1,n2):
 #T-S(n)
 #Note:Just we have to find the fasthest Node
 
+
+#===========================================
+#Inoreder Iterative Traversal
+#============================================
+#T-O(n)
+#T-S(n)
+def inorderIter(root):
+    stack=[]
+    curr=root
+    while curr!=None or stack!=[]:
+        while curr!=None:
+            stack.append(curr)
+            curr=curr.left
+        curr=stack.pop()
+        print(curr.val,end=" ")
+        curr=curr.right
 parent=Tree(50)
 parent.left=Tree(40)
 parent.right=Tree(30)
