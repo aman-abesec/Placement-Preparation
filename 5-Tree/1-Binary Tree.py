@@ -386,6 +386,23 @@ def inorderIter(root):
         curr=stack.pop()
         print(curr.val,end=" ")
         curr=curr.right
+        
+#===========================================
+#Preorder Iterative Traversal
+#============================================
+#T-O(n)
+#T-S(n)
+def preorIter(root):
+    stack=[]
+    curr=root
+    while curr!=None or stack!=[]:
+        while curr!=None:
+            stack.append(curr)
+            print(curr.val,end=" ")
+            curr=curr.left
+        curr=stack.pop()
+        curr=curr.right
+        
 parent=Tree(50)
 parent.left=Tree(40)
 parent.right=Tree(30)
