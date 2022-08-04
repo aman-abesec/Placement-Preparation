@@ -1,23 +1,23 @@
 #=========================================
 # Check for balanced Parenthesis
 #==========================================
-# def isBalancedParenthesis(parenthesis):
-#     stack=Stack()
-#     for i in parenthesis:
-#         if i=='(' or i=='{' or i=='[':
-#             stack.push(i)
-#         else:
-#             if stack.length()==0
-#                 return False
-#             else:
-#                 bracket_dict={')':'(','}':'{',']':'['}
-#                 if stack.peek()==bracket_dict[i]:
-#                     stack.pop()
-#                 else:
-#                     return False
-#     if stack.length()==0:
-#         return True
-#     return False
+def isBalancedParenthesis(parenthesis):
+    stack=Stack()
+    for i in parenthesis:
+        if i=='(' or i=='{' or i=='[':
+            stack.push(i)
+        else:
+            if stack.length()==0:
+                return False
+            else:
+                bracket_dict={')':'(','}':'{',']':'['}
+                if stack.peek()==bracket_dict[i]:
+                    stack.pop()
+                else:
+                    return False
+    if stack.length()==0:
+        return True
+    return False
 
 #=============================================
 # Infix to Postfix Conversion
@@ -43,6 +43,7 @@ def intopost(s):
                 elif stack!=[]:
                     while stack!=[] and priority[i]<=priority[stack[-1]]:
                         print(stack.pop(),end="")
+                    stack.append(i)
             #6-If Right Parenthesis pop untill Left parenthesis Found
             else:
                 while stack!=[] and stack[-1]!='(':
@@ -136,7 +137,7 @@ def evalpost(s):
 #print(evalpost("acb+*"))
 
 #==========================================
-# Evaluation of Postfix
+# Evaluation of Prefix
 #============================================
 def evalpre(s):
     stack=[]
@@ -204,7 +205,7 @@ def prevSmallest(num):
     stack=[0]
     ans=[-1]
     for i in range(1,len(num)):
-        while stack!=[] and num[stack[-1]]>=num[i]:
+        while stack!=[] and  num[stack[-1]]>=num[i]:
             stack.pop()
         if stack==[]:
             ans.append(-1)
@@ -239,12 +240,13 @@ def nextSmallest(num):
 def larAreaHisto(num):
     ps=prevSmallest(num)
     ns=nextSmallest(num)
+    # print(ps,ns)
     ans=0
     for i in range(len(num)):
         ans=max(ans,(ns[i]-ps[i]-1)*num[i])
     return ans
-# larAreaHisto([4,2,1,5,6,3,2,4,2])
-larAreaHisto([6,2,5,4,1,5,6])
+# print(larAreaHisto([4,2,1,5,6,3,2,4,2]))
+# larAreaHisto([6,2,5,4,1,5,6])
 
 #=============================================
 #Largest Rectangle with 1' matrix
@@ -258,7 +260,7 @@ def larRectmat(mat):
                 mat[i][j]+=mat[i-1][j]
         mx=max(mx,larAreaHisto(mat[i]))
     return mx
-print(larRectmat([[1,0,0,1,1],
-            [0,0,0,1,1],
-            [1,1,1,1,1],
-            [0,1,1,1,1]]))
+# print(larRectmat([[1,0,0,1,1],
+#             [0,0,0,1,1],
+#             [1,1,1,1,1],
+#             [0,1,1,1,1]]))
