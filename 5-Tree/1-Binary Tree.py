@@ -418,7 +418,6 @@ def postorderIter1(root):
         if k.right!=None:s1.append(k.right)
     while s2!=[]:
         print(s2.pop().val,end=" ")
-        
 #================================================
 #Post Oreder Traversal Using one stack
 #=================================================
@@ -432,13 +431,38 @@ def postorderIter2(root):
             curr=curr.left
         else:
             curr=stack[-1]
-            if curr!=None or curr->right!=prev:
+            if curr!=None or curr.right!=prev:
                 print(curr.val,end=" ")
                 prev=curr
                 curr=None
             else:
                 curr=curr.right
-                
+
+#=====================================================
+#Print inorder,pre Oreder,post order in one Traversal
+#======================================================
+def printInPrePost(root):
+    stack=[[root,1]]
+    In=[]
+    Pre=[]
+    Post=[]
+    while stack:
+        node,val=stack[-1]
+        if val==1:
+            Pre.append(node.val)
+            stack[-1][1]+=1
+            if node.left!=None:
+                stack.append([node.left,1])
+        elif val==2:
+            In.append(node.val)
+            stack[-1][1]+=1
+            if node.right!=None:
+                stack.append([node.right,1])
+        else:
+            Post.append(node.val)
+            stack.pop()
+    print(In,Pre,Post,sep="\n")
+
 parent=Tree(50)
 parent.left=Tree(40)
 parent.right=Tree(30)
