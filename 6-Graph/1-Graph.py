@@ -369,7 +369,32 @@ def shortestPathDAG(adj,vertex,weight):
                 dist[v]=dist[u]+weight[f"{u}{v}"]
     print(dist)
 
-adj=[[1],[2,3],[3],[]]
-vertex=3
-weight={"01":1,'12':3,"23":4,"13":2}
-shortestPathDAG(adj,vertex,weight)
+# adj=[[1],[2,3],[3],[]]
+# vertex=3
+# weight={"01":1,'12':3,"23":4,"13":2}
+# shortestPathDAG(adj,vertex,weight)
+
+#====================================================
+#Prim's algorithm-Minimum Dpanning Tree
+#(Given a weighted and connected undirected Graph)
+#===================================================
+#T-O(v^2)
+def minSpanning(adjMat,vertex):
+    ans=0
+    key=[math.inf for _ in range(vertex+1)]
+    key[0]=0
+    visit=[False for _ in range(vertex+1)]
+    for c in range(vertex+1):
+        u=-1
+        for i in range(vertex+1):
+            if visit[i]==False and (u==-1 or key[i]<key[u]):
+                u=i
+        visit[u]=True
+        ans+=key[u]
+        for v in range(vertex+1):
+            if adjMat[u][v]!=0 and visit[v]==False:
+                key[v]=min(key[v],adjMat[u][v])
+    print(ans)
+
+# adjMat=[[0,2,0,6,0],[2,0,3,8,5],[0,3,0,0,7],[6,8,0,0,9],[0,5,7,9,0]]
+# minSpanning(adjMat,4)
