@@ -398,3 +398,28 @@ def minSpanning(adjMat,vertex):
 
 # adjMat=[[0,2,0,6,0],[2,0,3,8,5],[0,3,0,0,7],[6,8,0,0,9],[0,5,7,9,0]]
 # minSpanning(adjMat,4)
+
+#=============================================================
+#Dijkstra's Algorithm
+#================================================
+#Note:>Does not work for negative weight edge
+#Does the Shortest path change if add a weight to alledge of the original graph.
+#T-O(n^2)
+def dijkstra(adj,vertex,s):
+    dist=[math.inf for _ in range(vertex+1)]
+    dist[s]=0
+    visit=[False for _ in range(vertex+1)]
+    for count in range(vertex+1):
+        u=-1
+        for i in range(vertex+1):
+            if visit[i]==False and (u==-1  or dist[u]>dist[i]):
+                u=i
+        visit[u]=True
+        for v in range(vertex+1):
+            if adj[u][v]!=0 and visit[v]==False:
+                dist[v]=min(dist[v],dist[u]+adj[u][v])
+    return dist
+
+# adj=[[0,50,100,0],[50,0,30,200],[100,30,0,20],[0,200,20,0]]
+# vertex=3
+# print(dijkstra(adj,vertex,0))
