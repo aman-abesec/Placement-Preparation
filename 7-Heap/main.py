@@ -2,7 +2,7 @@
 #     -left(i)=2*i+1
 #     -right(i)=2*i+2
 #     -parent(i)=abs(i-1/2)
-
+import math
 class minHeap:
     def __init__(self,cap):
         self.arr=[0 for _ in range(cap)]
@@ -43,7 +43,19 @@ class minHeap:
         self.size-=1
         self.minHeapify(0)
         return self.arr[self.size]
-
+    def decreaseKey(self,i,key):
+        #T-O(log(n))
+        self.arr[i]=key
+        while i!=0 and self.arr[i]<self.arr[self.parent(i)]:
+            self.arr[i],self.arr[self.parent(i)]=self.arr[self.parent(i)],self.arr[i]
+            i=self.parent(i)
+    def deleteKey(self,i):
+        self.decreaseKey(i,-math.inf)
+        self.extractMin()
+    def buildHeap(self):
+        #T-O(log(n))
+        for i in range((self.size-2)//2,-1,-1):
+            self.minHeapify(i)
 a=minHeap(10)
 a.insert(200)
 a.insert(70)
@@ -53,4 +65,6 @@ print(a.arr)
 a.minHeapify(0)
 print(a.arr)
 print(a.extractMin())
+a.deleteKey(1)
 print(a.arr)
+# print(a.arr)
