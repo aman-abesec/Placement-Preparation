@@ -21,6 +21,7 @@ def sortedinsert(curr,data):
 #============================================
 #          Middle of a LinkedList
 #=============================================
+#In case of even node fast will be at None and in case of odd node fast.next will be none
 def middleofll(curr):
     if curr==None:
         return
