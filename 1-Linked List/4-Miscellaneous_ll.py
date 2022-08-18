@@ -35,6 +35,8 @@ def middleofll(curr):
 
 #============================================
 #          Nth Node From End of a LinkedList
+# T-O(n)
+# s-O(1)
 #=============================================
 def nthNodefromend(curr,pos):
     if curr==None:return
